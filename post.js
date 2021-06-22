@@ -6,10 +6,8 @@ const T = require("./twit");
 //   console.log(tweet);
 // });
 
-function postar(screen_name, id_str, preco, ativo) {
-  console.log(screen_name, id_str, preco, ativo);
-
-  let status = `@${screen_name} Olá, a cotação do ativo ${ativo} é R$${preco}`;
+function responderAtivo(screen_name, id_str, preco, ativo) {
+  let status = `@${screen_name} Olá, a cotação do ativo ${ativo} é R$ ${preco}`;
   let username = `@${screen_name}`;
 
   T.post(
@@ -31,4 +29,4 @@ function postar(screen_name, id_str, preco, ativo) {
   }
 }
 
-module.exports = { postar };
+module.exports = { responderAtivo };

@@ -14,17 +14,21 @@ stream.on("tweet", async function (tweet) {
   if (frase[0] === "@mercadotv" && frase[1].toUpperCase() === "VALOR") {
     console.log(frase);
     let ativo = frase[2].toUpperCase();
-    const preco = await quotes.buscaCotacao(ativo);
-    console.log("Preço: ", preco);
-    console.log("Ativo: ", ativo);
+    const preco = await quotes.buscaCotacaoAcao(ativo);
 
-    let { id_str } = tweet;
-    let { screen_name } = tweet.user;
-    console.log(id_str);
-    console.log(screen_name);
-    console.log("🌟");
+    if (preco !== null) {
+      let { id_str } = tweet;
+      let { screen_name } = tweet.user;
+      console.log({
+        preco,
+        ativo,
+        id_str,
+        screen_name,
+        status: "✅",
+      });
 
-    post.postar(screen_name, id_str, preco, ativo);
+      post.responderAtivo(screen_name, id_str, preco, ativo);
+    }
   } else {
     console.log("Dados invalidos para responder");
   }
