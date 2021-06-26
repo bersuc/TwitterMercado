@@ -1,33 +1,25 @@
 require("dotenv").config();
 
-const quotes = require("./quotes");
-const post = require("./post");
+const quotes = require("./quotes/quotes");
+const post = require("./post/post");
 
-const T = require("./twit");
+const T = require("./config/twit");
 var stream = T.stream("statuses/filter", { track: ["mercadotv"] });
 
 stream.on("tweet", async function (tweet) {
+  var texto = tweet.text.replace(/ +(?= )/g, "");
   let frase = [];
-  frase = tweet.text.split(" ");
+  frase = texto.split(" ");
   // frase deve vir como @mercadotv valor petr4
-  console.log(frase[1].toUpperCase());
   if (frase[0] === "@mercadotv" && frase[1].toUpperCase() === "VALOR") {
     console.log(frase);
-    let ativo = frase[2].toUpperCase();
-    const preco = await quotes.buscaCotacaoAcao(ativo);
-
-    if (preco !== null) {
+    let symbol = frase[2].toUpperCase();
+    const { closPric: price, prcFlcn } = await quotes.buscaCotacaoAcao(symbol);
+    console.log(prcFlcn);
+    if (price !== null) {
       let { id_str } = tweet;
       let { screen_name } = tweet.user;
-      console.log({
-        preco,
-        ativo,
-        id_str,
-        screen_name,
-        status: "✅",
-      });
-
-      post.responderAtivo(screen_name, id_str, preco, ativo);
+      post.setReply(screen_name, id_str, price, symbol, prcFlcn);
     }
   } else {
     console.log("Dados invalidos para responder");

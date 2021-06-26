@@ -10,11 +10,11 @@ async function buscaCotacaoAcao(acao) {
 
   //if there is no data from API
   if (totalSize < 1) {
-    console.error("Erro, ativo não encontrado", ativo);
+    console.error("Erro, ativo não encontrado ->", ativo);
     return null;
   } else {
     var { closPric, dtTm, prcFlcn } = await dadosAtivos[totalSize - 1];
-    return closPric;
+    return { closPric, prcFlcn };
   }
 }
 
