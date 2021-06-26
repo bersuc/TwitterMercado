@@ -1,7 +1,7 @@
 # MercadoTV - TwitterBot 📺📈
 
-Please follow [MercadoTV](https://twitter.com/mercadotv) on twitter
-Create a Bot to reply followers and provide information about financial markets in Brazil.
+Please follow [MercadoTV](https://twitter.com/mercadotv) on twitter.
+Creating a Bot to reply followers and provide information about financial markets in Brazil.
 
 ## Source Informations
 
