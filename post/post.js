@@ -26,7 +26,6 @@ function setReply(screen_name, id_str, price, symbol, prcFlcn) {
         symbol,
         id_str,
         screen_name,
-        status: "✅",
         Tweeted: reply.text,
       });
     }

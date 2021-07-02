@@ -2,6 +2,11 @@ const axios = require("axios").default;
 require("dotenv").config();
 const baseURL = process.env.BASE_URL;
 
+/**
+ * Returns an object from symbol with price and variation
+ * @param {string} acao
+ * @returns {{closPric: Number, prcFlcn: Number }} Price and variation
+ */
 async function buscaCotacaoAcao(acao) {
   let ativo = acao.toUpperCase();
   const dados1 = await axios.get(`${baseURL}${ativo}`);

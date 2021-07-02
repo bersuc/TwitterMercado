@@ -23,3 +23,18 @@ stream.on("tweet", async function (tweet) {
     console.log("Dados invalidos para responder");
   }
 });
+<<<<<<< Updated upstream
+=======
+
+/**
+ * Return an array from tweeted text
+ * @param {string} phrase
+ * @returns {string[]} adjusted Phrase
+ */
+function checkPhrase(phrase) {
+  let texto = phrase.replace(/ +(?= )/g, "");
+  let frase = [];
+  frase = texto.split(" ");
+  return frase;
+}
+>>>>>>> Stashed changes
