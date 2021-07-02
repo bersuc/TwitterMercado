@@ -7,9 +7,7 @@ const T = require("./config/twit");
 var stream = T.stream("statuses/filter", { track: ["mercadotv"] });
 
 stream.on("tweet", async function (tweet) {
-  var texto = tweet.text.replace(/ +(?= )/g, "");
-  let frase = [];
-  frase = texto.split(" ");
+  var frase = await checkPhrase(tweet.text);
   // frase deve vir como @mercadotv valor petr4
   if (frase[0] === "@mercadotv" && frase[1].toUpperCase() === "VALOR") {
     let symbol = frase[2].toUpperCase();
@@ -23,3 +21,15 @@ stream.on("tweet", async function (tweet) {
     console.log("Dados invalidos para responder");
   }
 });
+
+/**
+ * Return an array from tweeted text
+ * @param {string} phrase
+ * @returns {string[]} adjusted Phrase
+ */
+function checkPhrase(phrase) {
+  var texto = phrase.replace(/ +(?= )/g, "");
+  let frase = [];
+  frase = texto.split(" ");
+  return frase;
+}
